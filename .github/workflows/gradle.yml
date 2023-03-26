@@ -53,12 +53,12 @@ jobs:
         - name: Make Directory
           run: mkdir -p deploy
 
-        # Jar 파일 복사
-        - name: Copy Jar
-          run: cp ./build/libs/*.jar ./deploy
-        - name: Build with Gradle
-          run: ./gradlew clean build
-          shell: bash
+#         # Jar 파일 복사
+#         - name: Copy Jar
+#           run: cp ./build/libs/*.jar ./deploy
+#         - name: Build with Gradle
+#           run: ./gradlew clean build
+#           shell: bash
 
         - name: Make zip file
           run: zip -r ./$ddal-ggak-codedeploy-app.zip .
