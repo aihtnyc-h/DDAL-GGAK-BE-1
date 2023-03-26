@@ -24,6 +24,7 @@ env:
   CODE_DEPLOY_APPLICATION_NAME: codedeploy
   CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: codedeploy_g
   ZIP_NAME: zip -r ./finalproject.zip .
+  APPLICATION: application.properties
 jobs:
     build:
       runs-on: ubuntu-latest
