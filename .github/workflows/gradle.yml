@@ -79,22 +79,38 @@ jobs:
 #           run: aws s3 cp 
 #             --region ap-northeast-2 ./ddal-ggak-codedeploy-app_build.zip s3://ddal-ggak-codedeploy-app_build.zip
 #             --acl private ./ddal-ggak-codedeploy-app.zip s3://ddal-ggak-codedeploy-app/
-
+    # (5) 빌드 결과물을 S3 버킷에 업로드
         - name: Upload to AWS S3
           run: |
             aws deploy push \
-            --application-name ${{ env.CODE_DEPLOY_APPLICATION_NAME }} \
-            --ignore-hidden-files \
-            --s3-location s3://S3_BUCKET_NAME/$GITHUB_SHA.zip \
-            --source .
-            # (6) S3 버킷에 있는 파일을 대상으로 CodeDeploy 실행
+              --application-name ${{ env.CODE_DEPLOY_APPLICATION_NAME }} \
+              --ignore-hidden-files \
+              --s3-location s3://$S3_BUCKET_NAME/$GITHUB_SHA.zip \
+              --source .
+        # (6) S3 버킷에 있는 파일을 대상으로 CodeDeploy 실행
         - name: Deploy to AWS EC2 from S3
           run: |
-             aws deploy create-deployment \
-               --application-name ${{ secrets.CODE_DEPLOY_APPLICATION_NAME }} \
-               --deployment-config-name CodeDeployDefault.AllAtOnce \
-               --deployment-group-name ${{ secrets.CODE_DEPLOY_DEPLOYMENT_GROUP_NAME }} \
-               --s3-location bucket=$S3_BUCKET_NAME,key=$GITHUB_SHA.zip,bundleType=zip
+            aws deploy create-deployment \
+              --application-name ${{ env.CODE_DEPLOY_APPLICATION_NAME }} \
+              --deployment-config-name CodeDeployDefault.AllAtOnce \
+              --deployment-group-name ${{ env.CODE_DEPLOY_DEPLOYMENT_GROUP_NAME }} \
+              --s3-location bucket=$S3_BUCKET_NAME,key=$GITHUB_SHA.zip,bundleType=zip
+
+#         - name: Upload to AWS S3
+#           run: |
+#             aws deploy push \
+#             --application-name ${{ env.CODE_DEPLOY_APPLICATION_NAME }} \
+#             --ignore-hidden-files \
+#             --s3-location s3://S3_BUCKET_NAME/$GITHUB_SHA.zip \
+#             --source .
+#             # (6) S3 버킷에 있는 파일을 대상으로 CodeDeploy 실행
+#         - name: Deploy to AWS EC2 from S3
+#           run: |
+#              aws deploy create-deployment \
+#                --application-name ${{ secrets.CODE_DEPLOY_APPLICATION_NAME }} \
+#                --deployment-config-name CodeDeployDefault.AllAtOnce \
+#                --deployment-group-name ${{ secrets.CODE_DEPLOY_DEPLOYMENT_GROUP_NAME }} \
+#                --s3-location bucket=$S3_BUCKET_NAME,key=$GITHUB_SHA.zip,bundleType=zip
                
                
 #           - name: Upload to AWS S3
