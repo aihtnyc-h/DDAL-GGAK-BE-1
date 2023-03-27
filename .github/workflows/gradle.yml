@@ -53,18 +53,15 @@ jobs:
         - name: jar with Gradle
           uses: gradle/gradle-build-action@v2
         - run: gradle jar
-       
        # Jar 파일 복사
 #         - name: Copy Jar
 #           run: cp ./build/libs/*.jar ./deploy     
-
         - name: Grant execute permission for gradlew
           run: chmod +x gradlew
           shell: bash
         # 디렉토리 생성
         - name: Make Directory
           run: mkdir -p deploy
-
 #        - name: Build with Gradle
 #           run: ./gradlew clean build
 #           shell: bash
