@@ -41,20 +41,6 @@ jobs:
           with:
             java-version: 11
             cache: gradle
-        
-#           env:
-#             override.value: ${{ secrets.DI_FROM_SECRET }}
-#         - name: init with Gradle
-#           uses: gradle/gradle-build-action@v2
-#         - run: gradle init
-#         - name: jar with Gradle
-#           uses: gradle/gradle-build-action@v2
-#         - run: gradle jar
-#         - name: Build with Gradle
-#           uses: gradle/gradle-build-action@v2
-#           with:
-#             gradle-version: 7.5.1
-#             arguments: build
     
         - name: Build with Gradle
           uses: gradle/gradle-build-action@v2
