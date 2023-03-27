@@ -84,7 +84,7 @@ jobs:
 
        #Jar 파일 복사
         - name: Copy Jar
-          run: cp ./finalproject/build/libs/*.jar ./deploy     
+          run: cp ./app/finalproject/build/libs/*.jar ./deploy     
     
     
 #        - name: Build with Gradle
