@@ -1,7 +1,7 @@
 vim ~/app/step1/deploy.sh
 # 자주 사용하는 값 변수에 저장
-REPOSITORY=/home/ec2-user/app/action
-PROJECT_NAME=finalproject-aws
+REPOSITORY=/home/ec2-user/app/build/libs
+PROJECT_NAME=DDAL-GGAK-BE-aws
 
 # git clone 받은 위치로 이동
 cd $REPOSITORY/$PROJECT_NAME/
