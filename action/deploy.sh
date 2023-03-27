@@ -1,12 +1,19 @@
 #!/usr/bin/env bash
 
-REPOSITORY=/deploy
-cd $REPOSITORY
+# REPOSITORY=/deploy
+# cd $REPOSITORY
 
-APP_NAME=java
-JAR_NAME=$(ls $REPOSITORY/build/libs/ | grep '.jar' | tail -n 1)
-JAR_PATH=$REPOSITORY/build/libs/$JAR_NAME
+# APP_NAME=java
+# JAR_NAME=$(ls $REPOSITORY/build/libs/ | grep '.jar' | tail -n 1)
+# JAR_PATH=$REPOSITORY/build/libs/$JAR_NAME
 
+BUILD_JAR=$(ls /home/ec2-user/action/build/libs/*.jar)
+JAR_NAME=$(basename $BUILD_JAR)
+echo ">>> build 파일명: $JAR_NAME" >> /home/ec2-user/action/deploy.log
+
+echo ">>> build 파일 복사" >> /home/ec2-user/action/deploy.log
+DEPLOY_PATH=/home/ec2-user/action/
+cp $BUILD_JAR $DEPLOY_PATH
 CURRENT_PID=$(pgrep -f $APP_NAME)
 
 if [ -z $CURRENT_PID ]
