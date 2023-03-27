@@ -54,7 +54,19 @@ jobs:
           
         - name: Make Directory
           run: mkdir dist
-
+#         - name: Grant execute permission for gradlew
+#           run: chmod +x gradlew
+#         - name: Build sith Gradle
+#           run: ./gradlew build
+# #           shell: bash
+#         - name: Build with Gradle
+#           uses: gradle/gradle-build-action@v2
+#           with:
+#             gradle-version: 7.5.1
+#             arguments: build
+#         - name: Grant execute permission for gradlew
+#           run: chmod +x gradlew
+                  
 
        #Jar 파일 복사
         - name: Copy Jar
@@ -72,6 +84,15 @@ jobs:
             aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
             aws-region: ${{ secrets.AWS_REGION }}
 
+#               AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#               AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#               AWS_REGION: ap-nortgeast-2
+#               AWS_REGION: ${{ secrets.AWS_REGION }}
+
+#         - name: Upload to S3
+#           run: aws s3 cp 
+#             --region ap-northeast-2 ./ddal-ggak-codedeploy-app_build.zip s3://ddal-ggak-codedeploy-app_build.zip
+#             --acl private ./ddal-ggak-codedeploy-app.zip s3://ddal-ggak-codedeploy-app/
     # (5) 빌드 결과물을 S3 버킷에 업로드
         - name: Upload to AWS S3
           run: |
@@ -88,4 +109,3 @@ jobs:
               --deployment-config-name CodeDeployDefault.AllAtOnce \
               --deployment-group-name ${{ env.CODE_DEPLOY_DEPLOYMENT_GROUP_NAME }} \
               --s3-location bucket=$S3_BUCKET_NAME,key=$GITHUB_SHA.zip,bundleType=zip
-
