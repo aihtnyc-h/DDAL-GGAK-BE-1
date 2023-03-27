@@ -44,9 +44,9 @@ jobs:
         
           env:
             override.value: ${{ secrets.DI_FROM_SECRET }}
-        - name: init with Gradle
-          uses: gradle/gradle-build-action@v2
-        - run: gradle init
+#         - name: init with Gradle
+#           uses: gradle/gradle-build-action@v2
+#         - run: gradle init
 #         - name: jar with Gradle
 #           uses: gradle/gradle-build-action@v2
 #         - run: gradle jar
