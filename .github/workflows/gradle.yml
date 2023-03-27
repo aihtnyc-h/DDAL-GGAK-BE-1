@@ -41,9 +41,9 @@ jobs:
           with:
             java-version: 11
             cache: gradle
-        - name: jar with Gradle
-          uses: gradle/gradle-build-action@v2
-        - run: gradle jar
+#         - name: jar with Gradle
+#           uses: gradle/gradle-build-action@v2
+#         - run: gradle jar
 #         - name: init with Gradle
 #           uses: gradle/gradle-build-action@v2
 #         - run: gradle init
