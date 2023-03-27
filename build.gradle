@@ -5,7 +5,7 @@ plugins {
 }
 
 jar {
-jar.enabled=false
+enabled=false
 }
 
 group = 'com.ddalgak'
