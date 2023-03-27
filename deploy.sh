@@ -17,6 +17,6 @@ else
   sudo kill -15 $CURRENT_PID
   sleep 5
 fi
-
-echo "> $JAR_PATH 배포"
-sudo nohup java -jar $JAR_PATH > /dev/null 2> /dev/null < /dev/null &
+DEPLOY_JAR=$DEPLOY_PATH$JAR_NAME
+echo ">>> DEPLOY_JAR 배포"    >> /home/ec2-user/action/deploy.log
+nohup java -jar $DEPLOY_JAR >> /home/ec2-user/deploy.log 2>/home/ec2-user/action/deploy_err.log &
