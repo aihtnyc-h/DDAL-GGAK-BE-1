@@ -1,29 +1,40 @@
-#!/usr/bin/env bash
+vim ~/app/step1/deploy.sh
+# 자주 사용하는 값 변수에 저장
+REPOSITORY=/home/ec2-user/app/step1
+PROJECT_NAME=springboot-aws
 
-# REPOSITORY=/deploy
-# cd $REPOSITORY
+# git clone 받은 위치로 이동
+cd $REPOSITORY/$PROJECT_NAME/
 
-# APP_NAME=java
-# JAR_NAME=$(ls $REPOSITORY/build/libs/ | grep '.jar' | tail -n 1)
-# JAR_PATH=$REPOSITORY/build/libs/$JAR_NAME
+# master 브랜치의 최신 내용 받기
+echo "> Git Pull"
+git pull
 
-BUILD_JAR=$(ls /home/ec2-user/action/build/libs/*.jar)
-JAR_NAME=$(basename $BUILD_JAR)
-echo ">>> build 파일명: $JAR_NAME" >> /home/ec2-user/action/deploy.log
+# build 수행
+echo "> project build start"
+./gradlew build
 
-echo ">>> build 파일 복사" >> /home/ec2-user/action/deploy.log
-DEPLOY_PATH=/home/ec2-user/action/
-cp $BUILD_JAR $DEPLOY_PATH
-CURRENT_PID=$(pgrep -f $APP_NAME)
+echo "> directory로 이동"
+cd $REPOSITORY
 
-if [ -z $CURRENT_PID ]
-then
-  echo "> 종료할것 없음."
+# build의 결과물 (jar 파일) 특정 위치로 복사
+echo "> build 파일 복사"
+cp $REPOSITORY/$PROJECT_NAME/build/libs/*.jar $REPOSITORY/
+
+echo "> 현재 구동중인 애플리케이션 pid 확인"
+CURRENT_PID=$(pgrep -f ${PROJECT_NAME}.*.jar)
+
+echo "> 현재 구동중인 애플리케이션 pid: $CURRENT_PID"
+if [ -z "$CURRENT_PID" ]; then
+	echo "> 현재 구동중인 애플리케이션이 없으므로 종료하지 않습니다."
 else
-  echo "> kill -9 $CURRENT_PID"
-  sudo kill -15 $CURRENT_PID
-  sleep 5
+	echo "> kill -15 $CURRENT_PID"
+	kill -15 $CURRENT_PID
+	sleep 5
 fi
-DEPLOY_JAR=$DEPLOY_PATH$JAR_NAME
-echo ">>> DEPLOY_JAR 배포"    >> /home/ec2-user/action/deploy.log
-nohup java -jar $DEPLOY_JAR >> /home/ec2-user/deploy.log 2>/home/ec2-user/action/deploy_err.log &
+
+echo "> 새 애플리케이션 배포"
+JAR_NAME=$(ls -tr $REPOSITORY/ | grep jar | tail -n 1)
+
+echo "> Jar Name: $JAR_NAME"
+nohup java -jar $REPOSITORY/$JAR_NAME 2>&1 &
