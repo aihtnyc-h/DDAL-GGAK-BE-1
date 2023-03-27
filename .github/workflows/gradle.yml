@@ -41,21 +41,20 @@ jobs:
           with:
             java-version: 11
             cache: gradle
-#         - name: jar with Gradle
-#           uses: gradle/gradle-build-action@v2
-#         - run: gradle jar
-#         - name: init with Gradle
-#           uses: gradle/gradle-build-action@v2
-#         - run: gradle init
+
+        - name: init with Gradle
+          uses: gradle/gradle-build-action@v2
+        - run: gradle init
+        - name: jar with Gradle
+          uses: gradle/gradle-build-action@v2
+        - run: gradle jar
         - name: Build with Gradle
           uses: gradle/gradle-build-action@v2
           with:
             gradle-version: 7.5.1
             arguments: build
             
-#         - name: jar with Gradle
-#           uses: gradle/gradle-build-action@v2
-#         - run: gradle jar
+
        # Jar 파일 복사
 #         - name: Copy Jar
 #           run: cp ./build/libs/*.jar ./deploy     
