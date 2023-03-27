@@ -45,8 +45,8 @@ jobs:
 
         - name: Grant execute permission for gradlew
           run: chmod +x gradlew
-        - name: Build sith Gradle
-          run: ./gradlew build
+#         - name: Build sith Gradle
+#           run: ./gradlew build
 #           shell: bash
         - name: Build with Gradle
           uses: gradle/gradle-build-action@v2
