@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-PROJECT_ROOT="/home/ubuntu/app"
-JAR_FILE="$PROJECT_ROOT/finalproject.jar"
+PROJECT_ROOT="/home/ubuntu/app/build/libs"
+JAR_FILE="$PROJECT_ROOT/DDAL-GGAK-BE.jar"
 
 APP_LOG="$PROJECT_ROOT/application.log"
 ERROR_LOG="$PROJECT_ROOT/error.log"
