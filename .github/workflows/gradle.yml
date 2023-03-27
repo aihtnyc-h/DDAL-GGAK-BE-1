@@ -24,7 +24,7 @@ env:
   CODE_DEPLOY_APPLICATION_NAME: codedeploy
   CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: codedeploy_g
   ZIP_NAME: zip -r ./finalproject.zip .
-  RESOURCE_PATH: ./src/main/resources/application.yml
+  APPLICATION: application.yml
 jobs:
     build:
       runs-on: ubuntu-latest
@@ -42,8 +42,8 @@ jobs:
             java-version: 11
             cache: gradle
         
-          env:
-            override.value: ${{ secrets.DI_FROM_SECRET }}
+#           env:
+#             override.value: ${{ secrets.DI_FROM_SECRET }}
 #         - name: init with Gradle
 #           uses: gradle/gradle-build-action@v2
 #         - run: gradle init
