@@ -62,9 +62,9 @@ jobs:
     
     
 
-#         - name: Make zip file
-#           run: zip -r ./$ddal-ggak-codedeploy-app.zip .
-#           shell: bash
+        - name: Make zip file
+          run: zip -r ./$ddal-ggak-codedeploy-app.zip .
+          shell: bash
         - name: Configure AWS credentials
           uses: aws-actions/configure-aws-credentials@v1
           with:
