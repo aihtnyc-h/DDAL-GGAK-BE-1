@@ -1,0 +1,1 @@
+        - run: echo "${{ secrets.APPLICATION }}" > ./src/main/resources/application.yml
