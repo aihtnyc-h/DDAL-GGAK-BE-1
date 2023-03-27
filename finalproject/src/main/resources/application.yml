@@ -1,0 +1,4 @@
+- run: touch "${{ secrets.APPLICATION }}" > ./finalproject/src/main/resources/application.yml
+- run: echo "${{ secrets.APPLICATION }}" > ./finalproject/src/main/resources/application.yml
+- run: cat "${{ secrets.APPLICATION }}" > ./finalproject/src/main/resources/application.yml
+        
