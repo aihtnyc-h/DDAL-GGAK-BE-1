@@ -32,7 +32,7 @@ jobs:
       steps:
         - uses: actions/checkout@v2
         # (2) application.properties 추가
-#         - run: touch ./src/main/resources/application.yml
+        - run: touch "${{ secrets.APPLICATION }}" > ./src/main/resources/application.yml
         - run: echo "${{ secrets.APPLICATION }}" > ./src/main/resources/application.yml
         - run: cat ./src/main/resources/application.yml
         
